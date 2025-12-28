@@ -8,6 +8,6 @@ dependencies {
 
 multiloader {
     mixins {
-        mixin("BlockBehaviour\$BlockStateBaseMixin", "WalkNodeEvaluatorMixin")
+        mixin("WalkNodeEvaluatorMixin")
     }
 }

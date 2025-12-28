@@ -46,7 +46,7 @@ public class DiagonalBlockHandler {
             BlockPos blockPos = hitResult.getBlockPos();
             BlockState blockState = level.getBlockState(blockPos);
             for (DiagonalBlockType type : DiagonalBlockType.TYPES) {
-                if (!type.supportsOriginalBlockState()) {
+                if (!type.supportsOriginalBlockState() && !blockState.is(type.getBlacklistTagKey())) {
                     Block newBlock;
                     Block block = blockState.getBlock();
                     if (type.getBlockConversions().containsKey(block)) {
@@ -56,6 +56,7 @@ public class DiagonalBlockHandler {
                     } else {
                         newBlock = null;
                     }
+
                     if (newBlock != null) {
                         BlockState newBlockState = newBlock.withPropertiesOf(blockState);
                         newBlockState = Block.updateFromNeighbourShapes(newBlockState, level, blockPos);
@@ -80,6 +81,7 @@ public class DiagonalBlockHandler {
                 setBlockForItem(blockItem, block);
             }
         }
+
         for (DiagonalBlockType type : DiagonalBlockType.TYPES) {
             type.getBlockConversions().forEach(BlockConversionHelper::copyBoundTags);
         }
@@ -110,11 +112,13 @@ public class DiagonalBlockHandler {
                     continue;
                 }
             }
+
             if (baseBlock.builtInRegistryHolder().is(type.getBlacklistTagKey())) {
                 BlockConversionHelper.setBlockForItem(blockItem, baseBlock);
             } else {
                 BlockConversionHelper.setBlockForItem(blockItem, diagonalBlock);
             }
+
             break;
         }
     }

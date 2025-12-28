@@ -80,7 +80,8 @@ public interface DiagonalBlockType {
      * @return can this type convert to the original if no diagonal block properties are in use
      */
     default boolean supportsOriginalBlockState() {
-        return true;
+        // disabled for now
+        return false;
     }
 
     /**

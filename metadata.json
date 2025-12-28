@@ -3,12 +3,12 @@
         "id": "diagonalblocks",
         "group": "fuzs.diagonalblocks",
         "name": "Diagonal Blocks",
-        "version": "21.11.0",
+        "version": "21.11.1",
         "authors": [
             "Fuzs",
             "XFactHD"
         ],
-        "description": "The core library behind the diagonal blocks mod series!",
+        "description": "The core library behind the diagonal blocks mod series.",
         "license": "MPL-2.0"
     },
     "dependencies": [
