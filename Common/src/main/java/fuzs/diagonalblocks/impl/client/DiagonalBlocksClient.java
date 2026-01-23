@@ -13,12 +13,15 @@ import fuzs.puzzleslib.api.client.renderer.v1.model.ModelLoadingHelper;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.resources.model.BlockStateModelLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 
@@ -39,23 +42,35 @@ public class DiagonalBlocksClient implements ClientModConstructor {
             diagonalBlockType.getBlockConversions().forEach((Block oldBlock, Block newBlock) -> {
                 context.registerBlockStateResolver(newBlock,
                         (ResourceManager resourceManager, Executor executor) -> {
-                            return ModelLoadingHelper.loadBlockState(resourceManager,
-                                            BuiltInRegistries.BLOCK.getKey(oldBlock),
-                                            executor)
-                                    .thenApply((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
-                                        return DiagonalModelHandler.transformLoadedBlockModelDefinitions(
-                                                loadedBlockModelDefinitions,
-                                                multiPartTranslator,
-                                                () -> {
-                                                    DiagonalModelHandler.reportInvalidBlockModel(BuiltInRegistries.BLOCK.getKey(
-                                                            oldBlock), diagonalBlockType);
-                                                });
-                                    })
-                                    .thenCompose((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
-                                        return ModelLoadingHelper.loadBlockState(loadedBlockModelDefinitions,
-                                                BuiltInRegistries.BLOCK.getKey(newBlock),
-                                                newBlock.getStateDefinition(),
-                                                executor);
+                            return CompletableFuture.supplyAsync(() -> resourceManager.getResource(BlockStateModelLoader.BLOCKSTATE_LISTER.idToFile(
+                                            BuiltInRegistries.BLOCK.getKey(newBlock))), executor)
+                                    .thenCompose((Optional<Resource> optional) -> {
+                                        if (optional.isPresent()) {
+                                            return ModelLoadingHelper.loadBlockState(resourceManager,
+                                                    newBlock,
+                                                    executor);
+                                        } else {
+                                            return ModelLoadingHelper.loadBlockState(resourceManager,
+                                                            BuiltInRegistries.BLOCK.getKey(oldBlock),
+                                                            executor)
+                                                    .thenApply((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
+                                                        return DiagonalModelHandler.transformLoadedBlockModelDefinitions(
+                                                                loadedBlockModelDefinitions,
+                                                                multiPartTranslator,
+                                                                () -> {
+                                                                    DiagonalModelHandler.reportInvalidBlockModel(
+                                                                            BuiltInRegistries.BLOCK.getKey(oldBlock),
+                                                                            diagonalBlockType);
+                                                                });
+                                                    })
+                                                    .thenCompose((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
+                                                        return ModelLoadingHelper.loadBlockState(
+                                                                loadedBlockModelDefinitions,
+                                                                BuiltInRegistries.BLOCK.getKey(newBlock),
+                                                                newBlock.getStateDefinition(),
+                                                                executor);
+                                                    });
+                                        }
                                     });
                         },
                         (BlockStateModelLoader.LoadedModels loadedModels, BiConsumer<BlockState, BlockStateModel.UnbakedRoot> blockStateConsumer) -> {
