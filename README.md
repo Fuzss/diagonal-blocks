@@ -2,15 +2,15 @@
 
 ### Minecraft 26.x
 
-| Branch | Status | Changelog |
-| --- | --- | --- |
-| [26.1.x](https://github.com/Fuzss/diagonal-blocks/tree/26.1.x) | ✅&nbsp;Primary | [CHANGELOG.md](https://github.com/Fuzss/diagonal-blocks/blob/26.1.x/CHANGELOG.md) |
+| Branch | Status | Changelog | Maven |
+| --- | --- | --- | --- |
+| [26.1.x](https://github.com/Fuzss/diagonal-blocks/tree/26.1.x) | ✅&nbsp;Primary | [CHANGELOG.md](https://github.com/Fuzss/diagonal-blocks/blob/26.1.x/CHANGELOG.md) | [`fuzs.diagonalblocks:diagonalblocks-common:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-common/21.11.1)<br />[`fuzs.diagonalblocks:diagonalblocks-fabric:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-fabric/21.11.1)<br />[`fuzs.diagonalblocks:diagonalblocks-neoforge:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-neoforge/21.11.1) |
 
 ### Minecraft 1.21.x
 
-| Branch | Status | Changelog |
-| --- | --- | --- |
-| [1.21.11](https://github.com/Fuzss/diagonal-blocks/tree/1.21.11) | ❌&nbsp;Archived | [CHANGELOG.md](https://github.com/Fuzss/diagonal-blocks/blob/1.21.11/CHANGELOG.md) |
+| Branch | Status | Changelog | Maven |
+| --- | --- | --- | --- |
+| [1.21.11](https://github.com/Fuzss/diagonal-blocks/tree/1.21.11) | ❌&nbsp;Archived | [CHANGELOG.md](https://github.com/Fuzss/diagonal-blocks/blob/1.21.11/CHANGELOG.md) | [`fuzs.diagonalblocks:diagonalblocks-common:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-common/21.11.1)<br />[`fuzs.diagonalblocks:diagonalblocks-fabric:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-fabric/21.11.1)<br />[`fuzs.diagonalblocks:diagonalblocks-neoforge:21.11.1`](https://github.com/Fuzss/modresources/tree/main/maven/fuzs/diagonalblocks/diagonalblocks-neoforge/21.11.1) |
 
 | Branch | Status | Changelog | Downloads |
 | --- | --- | --- | --- |
