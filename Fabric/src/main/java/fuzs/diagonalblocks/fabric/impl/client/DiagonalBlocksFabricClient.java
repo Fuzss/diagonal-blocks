@@ -1,7 +1,7 @@
 package fuzs.diagonalblocks.fabric.impl.client;
 
-import fuzs.diagonalblocks.impl.DiagonalBlocks;
-import fuzs.diagonalblocks.impl.client.DiagonalBlocksClient;
+import fuzs.diagonalblocks.common.impl.DiagonalBlocks;
+import fuzs.diagonalblocks.common.impl.client.DiagonalBlocksClient;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.fabricmc.api.ClientModInitializer;
 

@@ -1,6 +1,6 @@
 package fuzs.diagonalblocks.neoforge.integration.cfm;
 
-import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockTypes;
+import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 

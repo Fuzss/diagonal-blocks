@@ -1,6 +1,6 @@
 package fuzs.diagonalblocks.neoforge.impl.client.extensions;
 
-import fuzs.diagonalblocks.impl.client.util.DestroyEffectsHelper;
+import fuzs.diagonalblocks.common.impl.client.util.DestroyEffectsHelper;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

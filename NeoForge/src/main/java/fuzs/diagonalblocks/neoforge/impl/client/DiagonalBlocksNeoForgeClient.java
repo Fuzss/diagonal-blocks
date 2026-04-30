@@ -1,8 +1,8 @@
 package fuzs.diagonalblocks.neoforge.impl.client;
 
-import fuzs.diagonalblocks.impl.DiagonalBlocks;
-import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
-import fuzs.diagonalblocks.impl.client.DiagonalBlocksClient;
+import fuzs.diagonalblocks.common.impl.DiagonalBlocks;
+import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
+import fuzs.diagonalblocks.common.impl.client.DiagonalBlocksClient;
 import fuzs.diagonalblocks.neoforge.impl.client.extensions.DiagonalClientBlockExtensions;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.minecraft.world.level.block.Block;
