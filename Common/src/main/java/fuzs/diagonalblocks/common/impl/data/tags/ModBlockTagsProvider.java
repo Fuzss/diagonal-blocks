@@ -1,4 +1,4 @@
-package fuzs.diagonalblocks.common.impl.data;
+package fuzs.diagonalblocks.common.impl.data.tags;
 
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockTypes;

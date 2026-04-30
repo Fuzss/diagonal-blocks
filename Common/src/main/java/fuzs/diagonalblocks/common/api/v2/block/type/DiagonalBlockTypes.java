@@ -1,7 +1,7 @@
 package fuzs.diagonalblocks.common.api.v2.block.type;
 
 import fuzs.diagonalblocks.common.api.v2.block.*;
-import fuzs.diagonalblocks.common.impl.data.ModBlockTagsProvider;
+import fuzs.diagonalblocks.common.impl.data.tags.ModBlockTagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;

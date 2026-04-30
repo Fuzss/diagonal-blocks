@@ -2,14 +2,17 @@ package fuzs.diagonalblocks.common.impl;
 
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockTypes;
+import fuzs.diagonalblocks.common.impl.config.CommonConfig;
+import fuzs.diagonalblocks.common.impl.config.ServerConfig;
 import fuzs.diagonalblocks.common.impl.handler.DiagonalBlockHandler;
 import fuzs.diagonalblocks.common.impl.init.ModRegistry;
+import fuzs.puzzleslib.common.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.common.api.core.v1.ModLoaderEnvironment;
-import net.minecraft.resources.Identifier;
 import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import fuzs.puzzleslib.common.api.event.v1.entity.player.PlayerInteractEvents;
 import fuzs.puzzleslib.common.api.event.v1.server.TagsUpdatedCallback;
+import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +20,10 @@ public class DiagonalBlocks implements ModConstructor {
     public static final String MOD_ID = "diagonalblocks";
     public static final String MOD_NAME = "Diagonal Blocks";
     public static final Logger LOGGER = LogManager.getLogger(DiagonalBlocks.MOD_NAME);
+
+    public static final ConfigHolder CONFIG = ConfigHolder.builder(MOD_ID)
+            .common(CommonConfig.class)
+            .server(ServerConfig.class);
 
     @Override
     public void onConstructMod() {

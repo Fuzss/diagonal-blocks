@@ -1,7 +1,7 @@
 package fuzs.diagonalblocks.neoforge.impl;
 
 import fuzs.diagonalblocks.common.impl.DiagonalBlocks;
-import fuzs.diagonalblocks.common.impl.data.ModBlockTagsProvider;
+import fuzs.diagonalblocks.common.impl.data.tags.ModBlockTagsProvider;
 import fuzs.diagonalblocks.neoforge.integration.cfm.MrCrayfishFurnitureMod;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;

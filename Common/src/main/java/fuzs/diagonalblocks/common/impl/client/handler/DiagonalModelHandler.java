@@ -3,7 +3,7 @@ package fuzs.diagonalblocks.common.impl.client.handler;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.common.api.v2.client.MultiPartTranslator;
 import fuzs.diagonalblocks.common.impl.DiagonalBlocks;
-import fuzs.diagonalblocks.common.impl.data.ModBlockTagsProvider;
+import fuzs.diagonalblocks.common.impl.data.tags.ModBlockTagsProvider;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelDispatcher;
 import net.minecraft.client.resources.model.BlockStateModelLoader;
 import net.minecraft.resources.Identifier;

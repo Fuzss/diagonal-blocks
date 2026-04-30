@@ -2,6 +2,9 @@ package fuzs.diagonalblocks.common.impl.handler;
 
 import com.google.common.collect.BiMap;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
+import fuzs.diagonalblocks.common.impl.DiagonalBlocks;
+import fuzs.diagonalblocks.common.impl.config.CommonConfig;
+import fuzs.diagonalblocks.common.impl.config.ServerConfig;
 import fuzs.puzzleslib.common.api.block.v1.BlockConversionHelper;
 import fuzs.puzzleslib.common.api.event.v1.RegistryEntryAddedCallback;
 import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
@@ -41,6 +44,10 @@ public class DiagonalBlockHandler {
     }
 
     public static EventResultHolder<InteractionResult> onUseBlock(Player player, Level level, InteractionHand interactionHand, BlockHitResult hitResult) {
+        if (!DiagonalBlocks.CONFIG.get(ServerConfig.class).swapBlocksByInteracting) {
+            return EventResultHolder.pass();
+        }
+
         // allow for toggling between diagonal and non-diagonal block variants via shift+right-clicking with empty hand
         if (player.isSecondaryUseActive() && player.getItemInHand(interactionHand).isEmpty()) {
             BlockPos blockPos = hitResult.getBlockPos();
@@ -73,12 +80,14 @@ public class DiagonalBlockHandler {
         return EventResultHolder.pass();
     }
 
-    public static void onTagsUpdated(HolderLookup.Provider registries, boolean client) {
-        for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
-            if (entry.getValue() instanceof BlockItem blockItem) {
-                Block block = blockItem.getBlock();
-                setItemForBlock(entry.getKey().identifier(), blockItem, block);
-                setBlockForItem(blockItem, block);
+    public static void onTagsUpdated(HolderLookup.Provider registries, boolean isClientUpdate) {
+        if (DiagonalBlocks.CONFIG.get(CommonConfig.class).diagonalBlocksByDefault) {
+            for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
+                if (entry.getValue() instanceof BlockItem blockItem) {
+                    Block block = blockItem.getBlock();
+                    setItemForBlock(entry.getKey().identifier(), blockItem, block);
+                    setBlockForItem(blockItem, block);
+                }
             }
         }
 
