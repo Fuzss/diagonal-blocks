@@ -1,9 +1,10 @@
 {
+    "minecraft": "26.1.2",
     "mod": {
         "id": "diagonalblocks",
         "group": "fuzs.diagonalblocks",
         "name": "Diagonal Blocks",
-        "version": "21.11.1",
+        "version": "26.1.0",
         "authors": [
             "Fuzs",
             "XFactHD"
@@ -38,7 +39,7 @@
     "links": [
         {
             "name": "github",
-            "slug": "diagonalblocks"
+            "slug": "diagonal-blocks"
         }
     ],
     "environments": {

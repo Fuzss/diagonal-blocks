@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableList;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockTypes;
 import fuzs.diagonalblocks.api.v2.client.MultiPartTranslator;
 import fuzs.diagonalblocks.impl.client.resources.model.ConditionHelper;
-import net.minecraft.client.renderer.block.model.BlockModelDefinition;
-import net.minecraft.client.renderer.block.model.multipart.Condition;
-import net.minecraft.client.renderer.block.model.multipart.Selector;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelDispatcher;
+import net.minecraft.client.renderer.block.dispatch.multipart.Condition;
+import net.minecraft.client.renderer.block.dispatch.multipart.Selector;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.WallSide;
 
@@ -30,7 +30,7 @@ public final class WallMultiPartTranslator extends MultiPartTranslator {
     }
 
     @Override
-    protected BlockModelDefinition.MultiPartDefinition getModelFromBase(BlockModelDefinition.MultiPartDefinition multiPart) {
+    protected BlockStateModelDispatcher.MultiPartDefinition getModelFromBase(BlockStateModelDispatcher.MultiPartDefinition multiPart) {
         ImmutableList.Builder<Selector> builder = ImmutableList.builder();
         for (Selector selector : multiPart.selectors()) {
             if (selector.condition().isEmpty()) {
@@ -54,7 +54,8 @@ public final class WallMultiPartTranslator extends MultiPartTranslator {
                 }
             }
         }
-        return new BlockModelDefinition.MultiPartDefinition(builder.build());
+
+        return new BlockStateModelDispatcher.MultiPartDefinition(builder.build());
     }
 
     @Override

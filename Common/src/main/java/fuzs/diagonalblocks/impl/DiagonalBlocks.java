@@ -4,12 +4,12 @@ import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockTypes;
 import fuzs.diagonalblocks.impl.handler.DiagonalBlockHandler;
 import fuzs.diagonalblocks.impl.init.ModRegistry;
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
-import fuzs.puzzleslib.api.core.v1.ModLoaderEnvironment;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.core.v1.ModLoaderEnvironment;
 import net.minecraft.resources.Identifier;
-import fuzs.puzzleslib.api.event.v1.core.EventPhase;
-import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
-import fuzs.puzzleslib.api.event.v1.server.TagsUpdatedCallback;
+import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
+import fuzs.puzzleslib.common.api.event.v1.entity.player.PlayerInteractEvents;
+import fuzs.puzzleslib.common.api.event.v1.server.TagsUpdatedCallback;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

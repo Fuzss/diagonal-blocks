@@ -4,8 +4,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
 import fuzs.diagonalblocks.api.v2.block.DiagonalBlock;
-import net.minecraft.resources.Identifier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -83,8 +83,7 @@ public class DiagonalBlockTypeImpl implements DiagonalBlockType {
     public Block makeDiagonalBlock(Identifier identifier, Block block) {
         if (this.isTarget(identifier, block)) {
             Identifier id = this.id(identifier.getNamespace() + "/" + identifier.getPath());
-            Function<BlockBehaviour.Properties, Block> blockFactory = this.factoryOverrides.getOrDefault(
-                    identifier,
+            Function<BlockBehaviour.Properties, Block> blockFactory = this.factoryOverrides.getOrDefault(identifier,
                     this.defaultBlockFactory).apply(block);
             BlockBehaviour.Properties properties = BlockBehaviour.Properties.ofFullCopy(block)
                     .overrideLootTable(block.getLootTable())
@@ -116,11 +115,12 @@ public class DiagonalBlockTypeImpl implements DiagonalBlockType {
 
     private <T extends Comparable<T>, V extends T> BlockState copyBlockStateProperties(BlockState blockState, Block block) {
         BlockState newBlockState = block.defaultBlockState();
-        for (Map.Entry<Property<?>, Comparable<?>> entry : blockState.getValues().entrySet()) {
-            Property<?> property = this.sanitizeProperty(entry.getKey());
-            Comparable<?> value = this.sanitizePropertyValue(entry.getKey(), entry.getValue());
-            newBlockState = newBlockState.trySetValue((Property<T>) property, (V) value);
+        for (Property.Value<?> value : blockState.getValues().toList()) {
+            Property<?> property = this.sanitizeProperty(value.property());
+            Comparable<?> propertyValue = this.sanitizePropertyValue(value.property(), value.value());
+            newBlockState = newBlockState.trySetValue((Property<T>) property, (V) propertyValue);
         }
+
         return newBlockState;
     }
 

@@ -1,14 +1,14 @@
 package fuzs.diagonalblocks.impl.client.resources.model;
 
-import fuzs.puzzleslib.api.client.renderer.v1.model.MutableBakedQuad;
+import fuzs.puzzleslib.common.api.client.renderer.v1.model.MutableBakedQuad;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.SimpleModelWrapper;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.QuadCollection;
+import net.minecraft.client.resources.model.SimpleModelWrapper;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Util;
@@ -26,7 +26,7 @@ import java.util.function.Function;
 public record RotatedVariant(BlockStateModel.Unbaked variant, Direction direction) implements BlockStateModel.Unbaked {
     static final float ROTATION_ANGLE = -45.0F * 0.017453292F;
     /**
-     * Scale factor at a 45 degree rotation.
+     * Scale factor at a 45-degree rotation.
      */
     static final float SCALE_ROTATION_45 = 1.0F / (float) Math.cos(Math.PI / 4.0) - 1.0F;
     static final Vector3f ROTATION_ORIGIN = new Vector3f(0.5F, 0.5F, 0.5F);
@@ -46,32 +46,37 @@ public record RotatedVariant(BlockStateModel.Unbaked variant, Direction directio
 
     @Override
     public BlockStateModel bake(ModelBaker modelBaker) {
-        Function<BlockModelPart, BlockModelPart> blockModelPartRotator = Util.memoize((BlockModelPart blockModelPart) -> {
-            return rotateBlockModelPart(blockModelPart, this.direction);
+        Function<BlockStateModelPart, BlockStateModelPart> blockModelPartRotator = Util.memoize((BlockStateModelPart blockModelPart) -> {
+            return rotateBlockStateModelPart(blockModelPart, this.direction);
         });
         BlockStateModel blockStateModel = this.variant.bake(modelBaker);
         return new BlockStateModel() {
             @Override
-            public void collectParts(RandomSource randomSource, List<BlockModelPart> list) {
-                List<BlockModelPart> tmpList = new ObjectArrayList<>();
+            public void collectParts(RandomSource randomSource, List<BlockStateModelPart> list) {
+                List<BlockStateModelPart> tmpList = new ObjectArrayList<>();
                 blockStateModel.collectParts(randomSource, tmpList);
-                for (BlockModelPart blockModelPart : tmpList) {
+                for (BlockStateModelPart blockModelPart : tmpList) {
                     list.add(blockModelPartRotator.apply(blockModelPart));
                 }
             }
 
             @Override
-            public TextureAtlasSprite particleIcon() {
-                return blockStateModel.particleIcon();
+            public Material.Baked particleMaterial() {
+                return blockStateModel.particleMaterial();
+            }
+
+            @Override
+            public @BakedQuad.MaterialFlags int materialFlags() {
+                return blockStateModel.materialFlags();
             }
         };
     }
 
     /**
      * Duplicate and rotate all contained {@link BakedQuad BakedQuads} 45 degrees clockwise from the given
-     * {@link BlockModelPart} to produce a new variant for a diagonal side.
+     * {@link BlockStateModelPart} to produce a new variant for a diagonal side.
      */
-    private static BlockModelPart rotateBlockModelPart(BlockModelPart blockModelPart, Direction direction) {
+    private static BlockStateModelPart rotateBlockStateModelPart(BlockStateModelPart blockModelPart, Direction direction) {
 
         QuadCollection.Builder builder = new QuadCollection.Builder();
         for (Direction face : VALID_QUAD_FACES) {
@@ -89,7 +94,7 @@ public record RotatedVariant(BlockStateModel.Unbaked variant, Direction directio
 
         return new SimpleModelWrapper(builder.build(),
                 blockModelPart.useAmbientOcclusion(),
-                blockModelPart.particleIcon());
+                blockModelPart.particleMaterial());
     }
 
     /**

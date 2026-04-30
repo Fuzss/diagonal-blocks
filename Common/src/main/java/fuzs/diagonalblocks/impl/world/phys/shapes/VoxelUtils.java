@@ -1,6 +1,6 @@
 package fuzs.diagonalblocks.impl.world.phys.shapes;
 
-import fuzs.puzzleslib.api.util.v1.ShapesHelper;
+import fuzs.puzzleslib.common.api.util.v1.ShapesHelper;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 

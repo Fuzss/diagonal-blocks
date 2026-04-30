@@ -9,5 +9,6 @@ dependencies {
 multiloader {
     mixins {
         mixin("WalkNodeEvaluatorMixin")
+        accessor("BlockBehaviorAccessor")
     }
 }

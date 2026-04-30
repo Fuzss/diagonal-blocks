@@ -2,9 +2,9 @@ package fuzs.diagonalblocks.impl.handler;
 
 import com.google.common.collect.BiMap;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
-import fuzs.puzzleslib.api.block.v1.BlockConversionHelper;
-import fuzs.puzzleslib.api.event.v1.RegistryEntryAddedCallback;
-import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.common.api.block.v1.BlockConversionHelper;
+import fuzs.puzzleslib.common.api.event.v1.RegistryEntryAddedCallback;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;

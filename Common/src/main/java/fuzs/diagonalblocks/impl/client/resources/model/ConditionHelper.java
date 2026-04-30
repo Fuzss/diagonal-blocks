@@ -3,9 +3,9 @@ package fuzs.diagonalblocks.impl.client.resources.model;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import fuzs.diagonalblocks.impl.DiagonalBlocks;
-import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
-import net.minecraft.client.renderer.block.model.multipart.Condition;
-import net.minecraft.client.renderer.block.model.multipart.KeyValueCondition;
+import net.minecraft.client.renderer.block.dispatch.multipart.CombinedCondition;
+import net.minecraft.client.renderer.block.dispatch.multipart.Condition;
+import net.minecraft.client.renderer.block.dispatch.multipart.KeyValueCondition;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.StateHolder;
 import org.jspecify.annotations.Nullable;
@@ -26,7 +26,8 @@ public final class ConditionHelper {
      * Will return {@code null} when any of the transformers return {@code null} for the string, instead of returning an
      * empty condition.
      */
-    @Nullable public static Condition deepCopy(Condition condition, UnaryOperator<String> keyTransformer, BinaryOperator<String> valueTransformer) {
+    @Nullable
+    public static Condition deepCopy(Condition condition, UnaryOperator<String> keyTransformer, BinaryOperator<String> valueTransformer) {
         if (condition instanceof KeyValueCondition(Map<String, KeyValueCondition.Terms> tests)) {
             ImmutableMap.Builder<String, KeyValueCondition.Terms> stringTermsBuilder = ImmutableMap.builder();
             for (Map.Entry<String, KeyValueCondition.Terms> entry : tests.entrySet()) {

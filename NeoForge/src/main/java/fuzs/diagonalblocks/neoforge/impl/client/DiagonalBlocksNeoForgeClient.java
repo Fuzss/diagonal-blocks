@@ -4,7 +4,7 @@ import fuzs.diagonalblocks.impl.DiagonalBlocks;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.impl.client.DiagonalBlocksClient;
 import fuzs.diagonalblocks.neoforge.impl.client.extensions.DiagonalClientBlockExtensions;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;

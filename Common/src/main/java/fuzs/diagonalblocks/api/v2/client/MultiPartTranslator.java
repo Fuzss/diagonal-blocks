@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.impl.client.resources.model.MultiPartAppender;
-import net.minecraft.client.renderer.block.model.BlockModelDefinition;
-import net.minecraft.client.renderer.block.model.multipart.Selector;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelDispatcher;
+import net.minecraft.client.renderer.block.dispatch.multipart.Selector;
 import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.List;
@@ -32,16 +32,16 @@ public class MultiPartTranslator {
         return oldValue;
     }
 
-    public BlockModelDefinition.MultiPartDefinition apply(BlockModelDefinition.MultiPartDefinition baseBlockModel) {
+    public BlockStateModelDispatcher.MultiPartDefinition apply(BlockStateModelDispatcher.MultiPartDefinition baseBlockModel) {
         return this.applyAdditionalSelectors(this.getModelFromBase(baseBlockModel));
     }
 
-    protected BlockModelDefinition.MultiPartDefinition getModelFromBase(BlockModelDefinition.MultiPartDefinition multiPart) {
+    protected BlockStateModelDispatcher.MultiPartDefinition getModelFromBase(BlockStateModelDispatcher.MultiPartDefinition multiPart) {
         List<Selector> selectors = Lists.newArrayList(multiPart.selectors());
-        return new BlockModelDefinition.MultiPartDefinition(selectors);
+        return new BlockStateModelDispatcher.MultiPartDefinition(selectors);
     }
 
-    protected BlockModelDefinition.MultiPartDefinition applyAdditionalSelectors(BlockModelDefinition.MultiPartDefinition multiPart) {
+    protected BlockStateModelDispatcher.MultiPartDefinition applyAdditionalSelectors(BlockStateModelDispatcher.MultiPartDefinition multiPart) {
         return MultiPartAppender.appendDiagonalSelectors(multiPart, false);
     }
 

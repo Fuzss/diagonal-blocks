@@ -1,7 +1,7 @@
 package fuzs.diagonalblocks.fabric.impl;
 
 import fuzs.diagonalblocks.impl.DiagonalBlocks;
-import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 
 public class DiagonalBlocksFabric implements ModInitializer {

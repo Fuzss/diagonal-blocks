@@ -3,6 +3,7 @@ package fuzs.diagonalblocks.api.v2.block;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.api.v2.block.type.DiagonalBlockTypes;
 import fuzs.diagonalblocks.api.v2.util.EightWayDirection;
+import fuzs.diagonalblocks.mixin.accessor.BlockBehaviorAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -51,15 +52,14 @@ public class DiagonalWallBlock extends LegacyWallBlock implements StarCollisionB
         if (!(blockState.getBlock() instanceof DiagonalWallBlock)) {
             for (Direction direction : UPDATE_SHAPE_ORDER) {
                 BlockPos neighboringBlockPos = blockPos.relative(direction);
-                blockState = blockState.getBlock()
-                        .updateShape(blockState,
-                                levelAccessor,
-                                levelAccessor,
-                                blockPos,
-                                direction,
-                                neighboringBlockPos,
-                                levelAccessor.getBlockState(neighboringBlockPos),
-                                levelAccessor.getRandom());
+                blockState = ((BlockBehaviorAccessor) blockState.getBlock()).diagonalblocks$callUpdateShape(blockState,
+                        levelAccessor,
+                        levelAccessor,
+                        blockPos,
+                        direction,
+                        neighboringBlockPos,
+                        levelAccessor.getBlockState(neighboringBlockPos),
+                        levelAccessor.getRandom());
             }
             return blockState;
         } else {
@@ -116,15 +116,14 @@ public class DiagonalWallBlock extends LegacyWallBlock implements StarCollisionB
         blockState = direction != Direction.DOWN && this.shouldNotRaisePost(levelReader, blockPos, blockState) ?
                 blockState.trySetValue(LegacyWallBlock.UP, Boolean.FALSE) : blockState;
         if (!(blockState.getBlock() instanceof DiagonalWallBlock)) {
-            return blockState.getBlock()
-                    .updateShape(blockState,
-                            levelReader,
-                            scheduledTickAccess,
-                            blockPos,
-                            direction,
-                            neighboringBlockPos,
-                            neighboringBlockState,
-                            randomSource);
+            return ((BlockBehaviorAccessor) blockState.getBlock()).diagonalblocks$callUpdateShape(blockState,
+                    levelReader,
+                    scheduledTickAccess,
+                    blockPos,
+                    direction,
+                    neighboringBlockPos,
+                    neighboringBlockState,
+                    randomSource);
         } else {
             return blockState;
         }
@@ -141,15 +140,14 @@ public class DiagonalWallBlock extends LegacyWallBlock implements StarCollisionB
                 neighboringBlockState,
                 randomSource);
         if (!(blockState.getBlock() instanceof DiagonalWallBlock)) {
-            return blockState.getBlock()
-                    .updateShape(blockState,
-                            levelReader,
-                            scheduledTickAccess,
-                            blockPos,
-                            direction,
-                            neighboringBlockPos,
-                            neighboringBlockState,
-                            randomSource);
+            return ((BlockBehaviorAccessor) blockState.getBlock()).diagonalblocks$callUpdateShape(blockState,
+                    levelReader,
+                    scheduledTickAccess,
+                    blockPos,
+                    direction,
+                    neighboringBlockPos,
+                    neighboringBlockState,
+                    randomSource);
         } else {
             return blockState;
         }

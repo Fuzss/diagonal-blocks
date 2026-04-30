@@ -1,14 +1,14 @@
 package fuzs.diagonalblocks.impl.client.resources.model;
 
 import com.google.common.collect.Lists;
-import fuzs.diagonalblocks.api.v2.util.EightWayDirection;
 import fuzs.diagonalblocks.api.v2.block.StarCollisionBlock;
+import fuzs.diagonalblocks.api.v2.util.EightWayDirection;
 import net.minecraft.client.data.models.blockstates.ConditionBuilder;
-import net.minecraft.client.renderer.block.model.BlockModelDefinition;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
-import net.minecraft.client.renderer.block.model.multipart.Condition;
-import net.minecraft.client.renderer.block.model.multipart.Selector;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelDispatcher;
+import net.minecraft.client.renderer.block.dispatch.multipart.CombinedCondition;
+import net.minecraft.client.renderer.block.dispatch.multipart.Condition;
+import net.minecraft.client.renderer.block.dispatch.multipart.Selector;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.apache.commons.lang3.ArrayUtils;
@@ -25,7 +25,7 @@ public class MultiPartAppender {
      *
      * @param multiPart the original multipart unbaked variant
      */
-    public static BlockModelDefinition.MultiPartDefinition appendDiagonalSelectors(BlockModelDefinition.MultiPartDefinition multiPart, boolean rotateCenter) {
+    public static BlockStateModelDispatcher.MultiPartDefinition appendDiagonalSelectors(BlockStateModelDispatcher.MultiPartDefinition multiPart, boolean rotateCenter) {
 
         List<Selector> selectors = new ArrayList<>(multiPart.selectors());
         List<Selector> newSelectors = new ArrayList<>();
@@ -96,14 +96,15 @@ public class MultiPartAppender {
                     appendNewSelector(entry.getValue(), selector, entry.getKey(), newSelectors);
                 }
 
-                Selector newSelector = new Selector(Optional.of(ConditionHelper.negate(new CombinedCondition(CombinedCondition.Operation.OR,
+                Selector newSelector = new Selector(Optional.of(ConditionHelper.negate(new CombinedCondition(
+                        CombinedCondition.Operation.OR,
                         List.copyOf(conditions.values())))), selector.variant());
                 iterator.set(newSelector);
             }
         }
 
         selectors.addAll(newSelectors);
-        return new BlockModelDefinition.MultiPartDefinition(selectors);
+        return new BlockStateModelDispatcher.MultiPartDefinition(selectors);
     }
 
     private static Map<EightWayDirection, Condition> rotateCenterConditions() {

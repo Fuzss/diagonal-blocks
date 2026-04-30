@@ -6,11 +6,10 @@ import fuzs.diagonalblocks.api.v2.client.MultiPartTranslator;
 import fuzs.diagonalblocks.impl.client.handler.DiagonalModelHandler;
 import fuzs.diagonalblocks.impl.client.resources.translator.WallMultiPartTranslator;
 import fuzs.diagonalblocks.impl.client.resources.translator.WindowMultiPartTranslator;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.BlockStateResolverContext;
-import fuzs.puzzleslib.api.client.core.v1.context.RenderTypesContext;
-import fuzs.puzzleslib.api.client.renderer.v1.model.ModelLoadingHelper;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.context.BlockStateResolverContext;
+import fuzs.puzzleslib.common.api.client.renderer.v1.model.ModelLoadingHelper;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.BlockStateModelLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.packs.resources.Resource;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -53,8 +51,8 @@ public class DiagonalBlocksClient implements ClientModConstructor {
                                             return ModelLoadingHelper.loadBlockState(resourceManager,
                                                             BuiltInRegistries.BLOCK.getKey(oldBlock),
                                                             executor)
-                                                    .thenApply((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
-                                                        return DiagonalModelHandler.transformLoadedBlockModelDefinitions(
+                                                    .thenApply((List<BlockStateModelLoader.LoadedBlockStateModelDispatcher> loadedBlockModelDefinitions) -> {
+                                                        return DiagonalModelHandler.transformLoadedBlockStateModelDispatchers(
                                                                 loadedBlockModelDefinitions,
                                                                 multiPartTranslator,
                                                                 () -> {
@@ -63,7 +61,7 @@ public class DiagonalBlocksClient implements ClientModConstructor {
                                                                             diagonalBlockType);
                                                                 });
                                                     })
-                                                    .thenCompose((List<BlockStateModelLoader.LoadedBlockModelDefinition> loadedBlockModelDefinitions) -> {
+                                                    .thenCompose((List<BlockStateModelLoader.LoadedBlockStateModelDispatcher> loadedBlockModelDefinitions) -> {
                                                         return ModelLoadingHelper.loadBlockState(
                                                                 loadedBlockModelDefinitions,
                                                                 BuiltInRegistries.BLOCK.getKey(newBlock),
@@ -83,16 +81,6 @@ public class DiagonalBlocksClient implements ClientModConstructor {
                             }
                         });
             });
-        }
-    }
-
-    @Override
-    public void onRegisterBlockRenderTypes(RenderTypesContext<Block> context) {
-        // this runs deferred by default, so we should have all entries from other mods available to us
-        for (DiagonalBlockType type : DiagonalBlockType.TYPES) {
-            for (Map.Entry<Block, Block> entry : type.getBlockConversions().entrySet()) {
-                context.registerChunkRenderType(entry.getValue(), context.getChunkRenderType(entry.getKey()));
-            }
         }
     }
 }

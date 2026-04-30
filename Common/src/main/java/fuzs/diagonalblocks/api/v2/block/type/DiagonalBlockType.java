@@ -3,7 +3,7 @@ package fuzs.diagonalblocks.api.v2.block.type;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Sets;
 import fuzs.diagonalblocks.impl.handler.DiagonalBlockHandler;
-import fuzs.puzzleslib.api.event.v1.RegistryEntryAddedCallback;
+import fuzs.puzzleslib.common.api.event.v1.RegistryEntryAddedCallback;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;

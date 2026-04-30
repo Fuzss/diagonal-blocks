@@ -1,7 +1,7 @@
 package fuzs.diagonalblocks.impl.init;
 
 import fuzs.diagonalblocks.impl.DiagonalBlocks;
-import fuzs.puzzleslib.api.init.v3.tags.TagFactory;
+import fuzs.puzzleslib.common.api.init.v3.tags.TagFactory;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
