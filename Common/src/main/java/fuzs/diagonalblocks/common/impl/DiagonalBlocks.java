@@ -11,7 +11,7 @@ import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.common.api.core.v1.ModLoaderEnvironment;
 import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import fuzs.puzzleslib.common.api.event.v1.entity.player.PlayerInteractEvents;
-import fuzs.puzzleslib.common.api.event.v1.server.TagsUpdatedCallback;
+import fuzs.puzzleslib.common.api.event.v1.server.ServerResourcesLoadCallback;
 import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +41,7 @@ public class DiagonalBlocks implements ModConstructor {
     }
 
     private static void registerEventHandlers() {
-        TagsUpdatedCallback.EVENT.register(EventPhase.FIRST, DiagonalBlockHandler::onTagsUpdated);
+        ServerResourcesLoadCallback.EVENT.register(EventPhase.FIRST, DiagonalBlockHandler::onServerResourcesLoad);
         PlayerInteractEvents.USE_BLOCK.register(DiagonalBlockHandler::onUseBlock);
     }
 

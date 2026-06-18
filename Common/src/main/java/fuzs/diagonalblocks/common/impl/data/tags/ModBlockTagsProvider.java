@@ -8,8 +8,8 @@ import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagAppender;
 import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.Collections;
 import java.util.List;
@@ -212,7 +212,7 @@ public class ModBlockTagsProvider extends AbstractTagProvider<Block> {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.NEVER_BLOCKS_DIAGONAL_CONNECTIONS_BLOCK_TAG).add(Blocks.SNOW);
+        this.tag(ModRegistry.NEVER_BLOCKS_DIAGONAL_CONNECTIONS_BLOCK_TAG).add(BlockItemIds.SNOW.block());
         for (DiagonalBlockType diagonalBlockType : DiagonalBlockType.TYPES) {
             AbstractTagAppender<Block> tagAppender = this.tag(diagonalBlockType.getBlacklistTagKey());
             TAG_BLACKLISTED_TYPES.getOrDefault(diagonalBlockType, Collections.emptyList())

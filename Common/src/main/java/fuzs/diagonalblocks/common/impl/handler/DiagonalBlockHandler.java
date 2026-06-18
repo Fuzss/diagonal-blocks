@@ -9,11 +9,12 @@ import fuzs.puzzleslib.common.api.block.v1.BlockConversionHelper;
 import fuzs.puzzleslib.common.api.event.v1.RegistryEntryAddedCallback;
 import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -80,7 +81,11 @@ public class DiagonalBlockHandler {
         return EventResultHolder.pass();
     }
 
-    public static void onTagsUpdated(HolderLookup.Provider registries, boolean isClientUpdate) {
+    public static void onServerResourcesLoad(ReloadableServerResources serverResources, RegistryAccess registries) {
+        onTagsUpdated(registries);
+    }
+
+    public static void onTagsUpdated(RegistryAccess registries) {
         if (DiagonalBlocks.CONFIG.get(CommonConfig.class).diagonalBlocksByDefault) {
             for (Map.Entry<ResourceKey<Item>, Item> entry : BuiltInRegistries.ITEM.entrySet()) {
                 if (entry.getValue() instanceof BlockItem blockItem) {

@@ -6,9 +6,12 @@ import fuzs.diagonalblocks.common.api.v2.client.MultiPartTranslator;
 import fuzs.diagonalblocks.common.impl.client.handler.DiagonalModelHandler;
 import fuzs.diagonalblocks.common.impl.client.resources.translator.WallMultiPartTranslator;
 import fuzs.diagonalblocks.common.impl.client.resources.translator.WindowMultiPartTranslator;
+import fuzs.diagonalblocks.common.impl.handler.DiagonalBlockHandler;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.common.api.client.core.v1.context.BlockStateResolverContext;
+import fuzs.puzzleslib.common.api.client.event.v1.ClientTagsUpdatedCallback;
 import fuzs.puzzleslib.common.api.client.renderer.v1.model.ModelLoadingHelper;
+import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.BlockStateModelLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,10 +30,15 @@ public class DiagonalBlocksClient implements ClientModConstructor {
 
     @Override
     public void onConstructMod() {
+        registerEventHandlers();
         // this cannot happen later during client setup,
         // as model loading will already have begun by then in the background
         MultiPartTranslator.register(DiagonalBlockTypes.WINDOW, new WindowMultiPartTranslator());
         MultiPartTranslator.register(DiagonalBlockTypes.WALL, new WallMultiPartTranslator());
+    }
+
+    private static void registerEventHandlers() {
+        ClientTagsUpdatedCallback.EVENT.register(EventPhase.FIRST, DiagonalBlockHandler::onTagsUpdated);
     }
 
     @Override
