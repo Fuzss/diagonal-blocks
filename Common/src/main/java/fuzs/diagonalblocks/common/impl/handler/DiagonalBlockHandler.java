@@ -71,7 +71,7 @@ public class DiagonalBlockHandler {
                         level.setBlock(blockPos, newBlockState, 3);
                         level.neighborChanged(blockPos, newBlock, null);
                         level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, newBlockState));
-                        level.levelEvent(player, LevelEvent.PARTICLES_AND_SOUND_WAX_ON, blockPos, 0);
+                        level.levelEvent(player, LevelEvent.PARTICLES_WAX_ON, blockPos, 0);
                         return EventResultHolder.interrupt(InteractionResult.SUCCESS);
                     }
                 }

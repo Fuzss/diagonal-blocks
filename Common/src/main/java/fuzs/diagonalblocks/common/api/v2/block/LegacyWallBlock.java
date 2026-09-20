@@ -1,7 +1,6 @@
 package fuzs.diagonalblocks.common.api.v2.block;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.MapCodec;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -52,7 +51,6 @@ public class LegacyWallBlock extends CrossCollisionBlock {
             CrossCollisionBlock.SOUTH,
             WallBlock.WEST,
             CrossCollisionBlock.WEST);
-    public static final MapCodec<LegacyWallBlock> CODEC = simpleCodec(LegacyWallBlock::new);
     private static final VoxelShape POST_TEST = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
     public static final BooleanProperty UP = BlockStateProperties.UP;
     private final Function<BlockState, VoxelShape> shapeWithPostByIndex;
@@ -70,11 +68,6 @@ public class LegacyWallBlock extends CrossCollisionBlock {
                 .setValue(WATERLOGGED, Boolean.FALSE));
         this.shapeWithPostByIndex = this.makeShapes(4.0F * 2.0F, 16.0F, 3.0F * 2.0F, 0.0F, 14.0F);
         this.collisionShapeWithPostByIndex = this.makeShapes(4.0F * 2.0F, 24.0F, 3.0F * 2.0F, 0.0F, 24.0F);
-    }
-
-    @Override
-    protected MapCodec<? extends CrossCollisionBlock> codec() {
-        return CODEC;
     }
 
     @Override

@@ -3,9 +3,9 @@ package fuzs.diagonalblocks.common.impl.data.tags;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockType;
 import fuzs.diagonalblocks.common.api.v2.block.type.DiagonalBlockTypes;
 import fuzs.diagonalblocks.common.impl.init.ModRegistry;
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
-import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagAppender;
-import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagProvider;
+import fuzs.puzzleslib.common.api.data.v3.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.data.v3.tags.AbstractTagAppender;
+import fuzs.puzzleslib.common.api.data.v3.tags.AbstractTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.references.BlockItemIds;
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ModBlockTagsProvider extends AbstractTagProvider<Block> {
+public class ModBlockTagsProvider extends AbstractTagsProvider<Block> {
     private static final List<String> BUILT_IN_BLACKLISTED_FENCES = List.of("betternether:nether_reed_fence",
             "betterend:pythadendron_fence",
             "betternether:rubeus_fence",
